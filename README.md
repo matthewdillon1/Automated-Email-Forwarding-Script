@@ -2,6 +2,26 @@
 #### Author: Matthew Dillon
 #### Last Edited: 2025-06-15
 
+---
+
+## Table of Contents
+- [Purpose](#purpose)
+- [Background](#background)
+- [Project Relevance to Data Science](#project-relevance-to-data-science)
+- [Project Constraints](#project-constraints)
+- [Tools Leveraged](#tools-leveraged)
+- [Basic Solution Description](#basic-solution-description)
+- [Features](#features)
+- [Detailed Script Methodology](#detailed-script-methodology)
+- [Triggers](#triggers)
+- [Script Requirements](#script-requirements)
+- [Customization](#customization)
+- [Personal Deployment Results](#personal-deployment-results)
+- [Future Enhancements](#future-enhancements)
+- [Repository](#repository)
+  
+---
+
 ## Purpose
 This project was developed to automatically preserve historic Gmail threads from deletion under a new corporate email retention policy. It leverages Google Apps Script as an automated solution to maintain long-term email record-keeping for personal or professional use.
 
@@ -44,7 +64,7 @@ At a high level, my GAS code will identify email threads that are at risk of del
 ## Detailed Script Methodology
 My GAS script begins by connecting to the Gmail account associated with the current script user. If there are multiple email addresses associated with this one account (as is the case with my work account), only the first email address located will be used - this will be the "send to" and "receive from" email address. The script will then iterate via pagination through the user's email threads in their inbox and/or in their custom labels - importantly, the script will purposefully exclude threads and messages located in the Sent, Trash, Spam, Draft, Scheduled, Social, and Promotions labels. 
 
-For each qualifying email thread, the script will calculate the number of days that have elapsed since the most recent email message on the thread was either sent or received. If the most recent message is fewer than 363 days old, the script will do nothing and will iterate to the next thread. If the most recent message is greater than or equal to 363 days old (allowing for a two-day buffer before automated deletion), the email thread will then be automatically forwarded back <i>to</i> the user's account <i>from</i> the user's account - think of this as forwarding an email to yourself. This will essentially "reset the clock" and prevent the entire email thread from being automatically deleted pursuant to the new corporate policy.
+For each qualifying email thread, the script will calculate the number of days that have elapsed since the most recent email message on the thread was either sent or received. If the most recent message is fewer than 363 days old, the script will do nothing and will iterate to the next thread. If the most recent message is greater than or equal to 363 days old (allowing for a two-day buffer before automated deletion), the email thread will then be automatically forwarded back *to* the user's account *from* the user's account - think of this as forwarding an email to yourself. This will essentially "reset the clock" and prevent the entire email thread from being automatically deleted pursuant to the new corporate policy.
 
 Once an email thread has been forwarded back to the user, two additional steps are taken to streamline the process. Firstly, the forwarded email message will be marked as "read" so that the user will not be notified of the message. Secondly, the entire email thread will be archived out of the user's inbox via labels. If the email thread has a pre-existing label(s) associated with it, the thread will then be moved from the inbox to all applicable custom email labels. If the email thread does not have any pre-existing label(s) associated with it, the thread will be moved to a "catch-all" label of the year in which the most recent email message was sent. For example, if the most recent email message on the thread was sent in 2022, the entire thread will be moved out of the inbox and into a "2022" label. If the corresponding year label does not exist, the script will automatically create the label.
 
@@ -60,7 +80,7 @@ The requirements to leverage this script on your own account are as follows:
 3. Trigger (Triggers > Add Trigger > ...)
 4. Authorization (allows the script to interact with your Gmail account via the Gmail API; only required the first time the script is run)
 
-To leverage this script for personal use, navigate to https://script.google.com/home, create a new project, and copy/paste the attached GAS script. Script customization is discussed below.
+To leverage this script for personal use, navigate to [Google Apps Script](https://script.google.com/home), create a new project, and copy/paste the attached GAS script. Script customization is discussed below.
 
 
 ## Customization
@@ -79,3 +99,7 @@ While I do not plan on enhancing this script any further because it fits my need
 3. Improve the current structure of applying and creating labels such that it is easier for other users to customize based on individualized needs
 4. Change the 363 day mark into a parameter that the user can more easily specify at the beginning of the script
 5. Allow the user to custom-filter which email threads should be forwarded (example: only forward emails if any message on the thread is from persons A, B, or C)
+
+
+## Repository
+Github link: 
