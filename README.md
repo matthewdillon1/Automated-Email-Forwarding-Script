@@ -14,5 +14,13 @@ The only major constraint that this project faced was the fact that our corporat
 ## Tools Leveraged
 After researching and comparing a number of different potential tools that could be leveraged to develop a solution, I ultimately decided to pursue a solution in Google Apps Scripts. Google Apps Scripts (GAS) is Google's application development platform that allows any user with a Google account to create robust scripts in JavaScript programming to automate processes and create streamlined workflows. GAS has the incredibly powerful ability to integrate with the entirety of the Google Workspace products via individual APIs, meaning that users' scripts can seamlessly interact with Gmail, Google Drive, Google Sheets, Google Forms, Google Calendar, Google Docs, etc. etc.
 
-## Script Methodology
-My GAS script 
+## Basic Solution Description
+At a high level, my GAS code will iterate through the user's inbox/labels and calculate the number of days that have elapsed since the most recent email message on an email thread has been either sent or received. If the most recent email message is greater than 363 days (allowing for a two-day buffer before automated deletion), the email will then automatically be forwarded to the user's account from the user's account - think of this as forwarding an email to yourself. The script will also apply steps to mark the forwarded email as "read" and archive it out of the inbox. This allows the script to perform seamlessly in the background without requiring any human intervention, as well as keeping the inbox free of any historic email clutter.
+
+## Detailed Script Methodology
+My GAS begins by connecting to the Gmail account associated with the current script user. If there are multiple email addresses associated with this one account, only the first email address located will be used - this will be the 
+
+
+
+
+## Script Requirements
