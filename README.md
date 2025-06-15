@@ -2,26 +2,49 @@
 #### Author: Matthew Dillon
 #### Last Edited: 2025-06-15
 
+## Purpose
+This project was developed to automatically preserve historic Gmail threads from deletion under a new corporate email retention policy. It leverages Google Apps Script as an automated solution to maintain long-term email record-keeping for personal or professional use.
+
 
 ## Background
 In early 2024, the corporate overlords of the company I was working for at the time sent a notification to all 300,000+ employees that a new email retention policy would go into effect on April 21, 2024. This new policy would delete all email threads older than 365 days, and would continue to do so on a rolling basis in perpetuity. I did not feel that this policy was fair to employees like myself who, albeit infrequently, rely on information memorialized in historic email threads. Furthermore, I felt that this policy is even more outrageous to subsets of the corporation such as legal teams, financial teams, and C-suite employees who will surely have very important documentation saved in the archives of their email inbox.
 
 In a blatant act of corporate disobedience, I decided to leverage my data science and data analytics skill set/toolbox to develop a solution to what I viewed as an unreasonable decision from corporate. In a perfect world, I would be empowered and encouraged to publish and disseminate my solution to any and all employees who do not want to lose access to their historic email threads, but at the very least I hoped that I could leverage my solution for my own personal inbox.
 
+
+## Project Relevance to Data Science
+While this project doesn't leverage traditional ML/AI techniques that are usually synonymous with data science, it exemplifies many of the core tenets of data science such as:
+- Automation via programming (JavaScript in Google Apps Script)
+- Leveraging APIs to connect data sources
+- Designing and implementing self-sufficient workflows
+- Demonstrating creative solutioning and problem-solving within the confines of data and environmental constraints
+
+
 ## Project Constraints
 The only major constraint that this project faced was the fact that our corporate overlords were pushing all Google products, and as a result the entire organization uses Gmail. Therefore, my solution would need to be able to integrate with Gmail and unfortunately would not be applicable to Outlook users.
 
+
 ## Tools Leveraged
 After researching and comparing a number of different potential tools that could be leveraged to develop a solution, I ultimately decided to pursue a solution in Google Apps Scripts. Google Apps Scripts (GAS) is Google's application development platform that allows any user with a Google account to create robust scripts in JavaScript programming to automate processes and create streamlined workflows. GAS has the incredibly powerful ability to integrate with the entirety of the Google Workspace products via individual APIs, meaning that users' scripts can seamlessly interact with Gmail, Google Drive, Google Sheets, Google Forms, Google Calendar, Google Docs, etc. etc.
+
 
 ## Basic Solution Description
 At a high level, my GAS code will identify email threads that are at risk of deletion and automatically forward the email back to the user's email address to "reset the clock" to prevent deletion. The script will also apply steps to mark the forwarded email as "read" and archive it out of the inbox. With this functionality as well as a daily trigger set for an early morning hour, the script performs seamlessly in the background without the need for human intervention, all the while keeping the user's inbox free of historic email clutter.
 
 
+## Features
+- Automatically identifies and forwards email threads at risk of deletion back to the user
+- Specifically ignores email threads in Trash, Sent, Spam, Drafts, etc.
+- Resets the "age" of the email thread to avoid deletion
+- Leverages triggers to run automatically on a daily basis without human intervention
+- Marks forwarded emails as "read" and archives them out of the user's inbox
+- Organizes threads using the user's custom Gmail labels or automatically generating new labels
+
+
 ## Detailed Script Methodology
 My GAS script begins by connecting to the Gmail account associated with the current script user. If there are multiple email addresses associated with this one account (as is the case with my work account), only the first email address located will be used - this will be the "send to" and "receive from" email address. The script will then iterate via pagination through the user's email threads in their inbox and/or in their custom labels - importantly, the script will purposefully exclude threads and messages located in the Sent, Trash, Spam, Draft, Scheduled, Social, and Promotions labels. 
 
-For each qualifying email thread, the script will calculate the number of days that have elapsed since the most recent email message on the thread was either sent or received. If the most recent message is fewer than 363 days old, the script will do nothing and will iterate to the next thread. If the most recent message is greater than or equal to 363 days old (allowing for a two-day buffer before automated deletion), the email thread will then be automatically forwarded back <i>to</i> the user's account <i>from</i> the user's account - think if this as forwarding an email to yourself. This will essentially "reset the clock" and prevent the entire email thread from being automatically deleted pursuant to the new corporate policy.
+For each qualifying email thread, the script will calculate the number of days that have elapsed since the most recent email message on the thread was either sent or received. If the most recent message is fewer than 363 days old, the script will do nothing and will iterate to the next thread. If the most recent message is greater than or equal to 363 days old (allowing for a two-day buffer before automated deletion), the email thread will then be automatically forwarded back <i>to</i> the user's account <i>from</i> the user's account - think of this as forwarding an email to yourself. This will essentially "reset the clock" and prevent the entire email thread from being automatically deleted pursuant to the new corporate policy.
 
 Once an email thread has been forwarded back to the user, two additional steps are taken to streamline the process. Firstly, the forwarded email message will be marked as "read" so that the user will not be notified of the message. Secondly, the entire email thread will be archived out of the user's inbox via labels. If the email thread has a pre-existing label(s) associated with it, the thread will then be moved from the inbox to all applicable custom email labels. If the email thread does not have any pre-existing label(s) associated with it, the thread will be moved to a "catch-all" label of the year in which the most recent email message was sent. For example, if the most recent email message on the thread was sent in 2022, the entire thread will be moved out of the inbox and into a "2022" label. If the corresponding year label does not exist, the script will automatically create the label.
 
