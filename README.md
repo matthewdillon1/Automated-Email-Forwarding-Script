@@ -100,6 +100,7 @@ While I do not plan on enhancing this script any further because it fits my need
 4. Change the 363 day mark into a parameter that the user can more easily specify at the beginning of the script
 5. Allow the user to custom-filter which email threads should be forwarded (example: only forward emails if any message on the thread is from persons A, B, or C)
 
+---
 
 ## Repository
 Github link: 
