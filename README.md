@@ -1,6 +1,6 @@
 # Automated Email Forwarding Script
 #### Author: Matthew Dillon
-#### Last Edited: 2025-06-15
+#### Last Edited: 2025-06-17
 
 ---
 
@@ -18,7 +18,7 @@
 - [Customization](#customization)
 - [Personal Deployment Results](#personal-deployment-results)
 - [Future Enhancements](#future-enhancements)
-- [Repository](#repository)
+- [Links](#links)
   
 ---
 
@@ -102,5 +102,6 @@ While I do not plan on enhancing this script any further because it fits my need
 
 ---
 
-## Repository
-Github link: 
+## Links
+[Github repository link](https://github.com/matthewdillon1/Automated-Email-Forwarding-Script)
+[automated-email-forwarding-script.js](https://github.com/matthewdillon1/Automated-Email-Forwarding-Script/blob/main/automated-email-forwarding-script.js)
