@@ -104,4 +104,5 @@ While I do not plan on enhancing this script any further because it fits my need
 
 ## Links
 [Github repository link](https://github.com/matthewdillon1/Automated-Email-Forwarding-Script)
+
 [automated-email-forwarding-script.js](https://github.com/matthewdillon1/Automated-Email-Forwarding-Script/blob/main/automated-email-forwarding-script.js)
